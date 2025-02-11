@@ -8,9 +8,7 @@ class Solution:
             stack.append(i)
 
             if len(stack)>=n:
-                q = "".join(stack[-n:])
-
-                if q == part:
+                if "".join(stack[-n:]) == part:
                     j = n
                     while j>0:
                         stack.pop()
