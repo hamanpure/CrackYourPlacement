@@ -1,10 +1,6 @@
 import heapq
 class Solution:
     def minOperations(self, nums: List[int], k: int) -> int:
-        n = len(nums)
-        if n < 2:
-            return 0
-
         heapq.heapify(nums)
         
         count = 0
