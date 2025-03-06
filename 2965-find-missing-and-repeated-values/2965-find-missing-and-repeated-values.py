@@ -12,11 +12,10 @@ class Solution:
             if v > 1:
                 res.append(k)
                 break
-        
-        m = max(mp.keys())
 
         for i in range(1,r*c+1):
             if i not in mp:
                 res.append(i)
+                break
                 
         return res
