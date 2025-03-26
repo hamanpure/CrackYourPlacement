@@ -1,20 +1,18 @@
-#User function Template for python3
-
 class Solution:
-    def wordBreak(self, n, s, dictionary):
-        # Complete this function
-        dp = [0]*(len(s)+1)
+    def wordBreak(self, s, dictionary):
+        word_set = set(dictionary)  # Convert list to set for O(1) lookup
+        n = len(s)
+        dp = [False] * (n + 1)
+        dp[0] = True  # Base case: empty string is always valid
+
+        for i in range(1, n + 1):  # Iterate over the string length
+            for j in range(max(0, i - max(map(len, dictionary))), i):  # Check only relevant substrings
+                if dp[j] and s[j:i] in word_set:
+                    dp[i] = True
+                    break  # Stop early if a valid segmentation is found
         
-        dp[len(s)] = 1
-        
-        for i in range(len(s) - 1, -1, -1 ):
-            for w in dictionary:
-                if (i + len(w)) <= len(s) and s[i:i+len(w)] == w:
-                    dp[i] = dp[i+len(w)]
-                if dp[i]:
-                    break 
-        return dp[0]
-                
+        return dp[n]
+
 
 #{ 
  # Driver Code Starts
@@ -22,14 +20,13 @@ if __name__ == '__main__':
     test_case = int(input())
 
     for _ in range(test_case):
-        n = int(input())
-        dictionary = [word for word in input().strip().split()]
         s = input().strip()
+        dictionary = input().strip().split()
         ob = Solution()
-        res = ob.wordBreak(n, s, dictionary)
+        res = ob.wordBreak(s, dictionary)
         if res:
-            print(1)
+            print("true")
         else:
-            print(0)
+            print("false")
         print("~")
 # } Driver Code Ends
